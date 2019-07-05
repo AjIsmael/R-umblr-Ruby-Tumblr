@@ -1,0 +1,13 @@
+<%= @user.first_name %><br>
+<form action="/users/profile" method="post">
+  <input type="text" name="first_name">
+  <input type="submit" value="Submit">
+</form>
+<br><%= @user.last_name %><br>
+<form action="/users/profile" method="post">
+  <input type="text" name="last_name">
+  <input type="submit" value="Submit">
+</form>
+<br><%= @user.email %><br>
+<br><%= @user.birthday %><br>
+<br>

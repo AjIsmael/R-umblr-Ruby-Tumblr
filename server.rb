@@ -53,6 +53,7 @@ post '/users/login' do
     if user.password == given_password
       p "user authenticated successfully"
       session[:user_id] = user.id
+      redirect '/users/feeds'
     else
       p "invalid password"
     end

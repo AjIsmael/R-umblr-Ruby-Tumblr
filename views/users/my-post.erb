@@ -1,8 +1,12 @@
 <% @posts.each do |t| %>
-<%= t['title'] %><br>
-<%= t['content']%><br>
-<%= t['image_url']%><br>
-<%= t['image_url']%><br>
-<%= t['user_id']%><br>
-<%= t['created_at']%><br><br><br>
+<div class="jumbotron">
+  <h1 class="display-4"><%= t['title'] %></h1>
+  <p class="lead"><%= t['content']%></p>
+  <% if t['image_url'] != '' %>
+  <img src="<%=t['image_url']%>">
+  <%end%>
+  <hr class="my-4">
+  <p class="lead"><%= t['created_at']%></p>
+</div>
 <%end%>
+<!-- t['user_id'] -->

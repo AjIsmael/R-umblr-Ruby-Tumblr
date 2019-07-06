@@ -1,8 +1,23 @@
-<% @posts.each do |t| %>
-<%= t['title'] %><br>
-<%= t['content']%><br>
-<%= t['image_url']%><br>
-<%= t['image_url']%><br>
-<%= t['user_id']%><br>
-<%= t['created_at']%><br><br><br>
+<% count = @posts.length - 1 %>
+<% for x in 0..(@posts.length - 1) do %>
+<div class="jumbotron">
+  <h1 class="display-4"><%= @posts[x]['title'] %></h1>
+  <p class="lead"><%= @posts[x]['content']%></p>
+  <% if @posts[x]['image_url'] != '' %>
+  <img src="<%=@posts[x]['image_url']%>">
+  <%end%>
+  <hr class="my-4">
+  <p class="lead"><%= @posts[x]['created_at']%></p>
+  <% if @comments[x].length > 0 %>
+  <% @comments[x].each do |t| %>
+    <p><%= t['comment_content']%></p>
+  <% end %>
+  <% end %>
+  <form action="/users/feeds" method="post" class="px-4 py-3">
+    <div class="form-group">
+      <input type="hidden" name="post_id" value="<%= @posts[x]['id'] %>">
+      <input type="text" name="comment_content" class="form-control" placeholder="your comment">
+    </div>
+  </form>
+</div>
 <%end%>

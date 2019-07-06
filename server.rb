@@ -1,6 +1,7 @@
 require "sinatra/activerecord"
 require "sinatra"
 
+
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database:"./database.sqlite3")
 set :database, {adapter: "sqlite3", database: "./database.sqlite3"}
 enable :sessions
@@ -9,6 +10,9 @@ class User < ActiveRecord::Base
 end
 
 class Post < ActiveRecord::Base
+end
+
+class Comment < ActiveRecord::Base
 end
 
 
@@ -63,10 +67,23 @@ end
 get '/users/feeds' do
   if session[:user_id]
     @posts = JSON.parse(Post.all.order(created_at: :desc).to_json)
+    @comments = []
+    @posts.each do |post|
+      @comments << JSON.parse((Comment.where("post_id = ?", post['id']).order(created_at: :desc).to_json))
+    end
     erb :'/users/feeds'
   else
     redirect '/'
   end
+end
+
+post '/users/feeds' do
+  params.merge!(commenter_id: "#{session[:user_id]}")
+  @comment = Comment.new(params)
+  if @comment.save
+    p "#{@comment.id} was saved to the database"
+  end
+  redirect '/users/feeds'
 end
 
 

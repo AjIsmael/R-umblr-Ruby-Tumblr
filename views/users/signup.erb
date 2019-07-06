@@ -1,11 +1,28 @@
 <h1>Sign up</h1>
 
+<div class="container">
 
 <form class="" action="/users/signup" method="post">
-  <input type="text" name="first_name" placeholder="First Name"><br>
-  <input type="text" name="last_name" placeholder="Last Name"><br>
-  <input type="email" name="email" placeholder="Email"><br>
-  <input type="password" name="password" placeholder="Password"><br>
-  <input type="date" name="birthday" placeholder="Birthday"><br>
-  <input type="submit" >
+  <div class="form-group">
+    <label>First Name</label>
+    <input type="text" name="first_name"  class="form-control" placeholder="First Name">
+  </div>
+  <div class="form-group">
+    <label>Last Name</label>
+    <input type="text" name="last_name"  class="form-control" placeholder="Last Name">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label>Birthday</label>
+    <input type="date" name="birthday" class="form-control"  placeholder="Birthday">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
 </form>
+</div>

@@ -3,6 +3,9 @@
 <div class="container">
 
 <form class="" action="/users/signup" method="post">
+  <% if @missedInformation %>
+  <small> you missed to input some information please refill all the fields and try again.</small>
+  <% end %>
   <div class="form-group">
     <label>First Name</label>
     <input type="text" name="first_name"  class="form-control" placeholder="First Name">
@@ -15,10 +18,19 @@
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
   </div>
+  <% if @alert %>
+  <small> The email address you used exists in our database.</small>
+  <% end %>
+  <% if @emailError %>
+  <small> The email address you used is not a valid email.</small>
+  <% end %>
   <div class="form-group">
     <label>Birthday</label>
     <input type="date" name="birthday" class="form-control"  placeholder="Birthday">
   </div>
+  <% if @ageLimitalert %>
+  <small> You must be between the age of 18 and 85 to signup to this website.</small>
+  <% end %>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">

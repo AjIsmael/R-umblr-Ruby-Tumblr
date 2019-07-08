@@ -1,5 +1,8 @@
 <div class="container">
   <form action="/users/login" method="post">
+    <% if defined?(@missedInformation)  %>
+    <small> Check if you have filled all required information. You have missed some.</small>
+    <% end %>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -8,6 +11,9 @@
       <label for="exampleInputPassword1">Password</label>
       <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
     </div>
+    <% if defined?(@alert)  %>
+    <small> Incorrect email or password </small>
+    <% end %>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 

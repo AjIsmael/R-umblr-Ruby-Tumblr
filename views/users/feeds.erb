@@ -1,13 +1,14 @@
+<% require "erb" %>
 <% count = @posts.length - 1 %>
 <% for x in 0..(@posts.length - 1) do %>
 <div class="jumbotron">
-  <h1 class="display-4"><%= @posts[x]['title'] %></h1>
-  <p class="lead"><%= @posts[x]['content']%></p>
+  <h1 class="display-4"><%= ERB::Util.html_escape(@posts[x]['title']) %></h1>
+  <p class="lead"><%=ERB::Util.html_escape("#{@posts[x]['content']}")%></p>
   <% if @posts[x]['image_url'] != '' %>
   <img src="<%=@posts[x]['image_url']%>">
   <%end%>
   <hr class="my-4">
-  <p class="lead"><%= @posts[x]['created_at']%></p>
+  <p class="lead"><%= "#{@posts[x]['created_at']}"%></p>
   <% if @comments[x].length > 0 %>
   <% @comments[x].each do |t| %>
     <p><%= t['comment_content']%></p>

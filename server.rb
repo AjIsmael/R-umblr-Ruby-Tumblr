@@ -1,6 +1,41 @@
 require "sinatra/activerecord"
 require "sinatra"
+require "httparty"
+require "action_mailer"
+require "./mailer.rb"
 
+$paramForSignup = {}
+$confirmationCode = ''
+
+def signUpValidation
+  isValid = true
+  isValid = false if params[:first_name] == ''
+  isValid = false if params[:last_name] == ''
+  isValid = false if params[:email] == ''
+  isValid = false if params[:password] == ''
+  isValid = false if params[:birthday] == ''
+  return isValid
+end
+def age(dateOfBirth)
+  now = Time.new
+  dob = dateOfBirth.split('-')
+  dob = [dob[0].to_i, dob[1].to_i, dob[2].to_i]
+  age = now.year - dob[0]
+  if now.month > dob[1]
+    age -= 1
+  elsif now.day > dob[2]
+    age -= 1
+  end
+  age
+end
+def emailValidation(email)
+  true if email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+end
+
+
+def send_email(rec, confirmation_code,last_name)
+  Newsletter.confirmation(rec,confirmation_code, last_name).deliver_now
+end
 
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database:"./database.sqlite3")
 set :database, {adapter: "sqlite3", database: "./database.sqlite3"}
@@ -31,11 +66,45 @@ get "/users/signup" do
 end
 
 post '/users/signup' do
-  @user = User.new(params)
-  if @user.save
-    p "#{@user.first_name} was saved to the database"
+  user = User.find_by(email:params[:email])
+  validity = signUpValidation
+  age = age(params[:birthday])
+  if validity == false
+    @missedInformation = true
+    p 'failed validation'
+    p params[:birthday]
+    erb :'users/signup'
+  elsif age < 18 || age > 85
+    @ageLimitalert = true
+    erb :'users/signup'
+  elsif !emailValidation(params[:email])
+    @emailError = true
+    erb :'users/signup'
+  elsif user
+    @alert = true
+    p 'user exists'
+    erb :'users/signup'
+  else
+    $confirmationCode = rand.to_s[2..10]
+    $paramForSignup = params
+    send_email(params[:email], $confirmationCode, params[:last_name])
+    erb :'users/confirmSignUp'
   end
-  erb :'users/thanks'
+end
+
+post '/users/confirmSignUp' do
+  if params[:confirmationCode] == $confirmationCode
+    @user = User.new($paramForSignup)
+    if @user.save
+      p "#{@user.first_name} was saved to the database"
+    else
+      p "something is not working"
+    end
+    p params[:confirmationCode]
+    p $confirmationCode
+    p $paramForSignup
+    erb :'users/thanks'
+  end
 end
 
 get '/users/thanks' do
@@ -59,7 +128,8 @@ post '/users/login' do
       session[:user_id] = user.id
       redirect '/users/feeds'
     else
-      p "invalid password"
+      @alert = true
+      erb :'/users/login'
     end
   end
 end

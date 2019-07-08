@@ -1,7 +1,8 @@
+<% require 'erb' %>
 <% @posts.each do |t| %>
 <div class="jumbotron">
-  <h1 class="display-4"><%= t['title'] %></h1>
-  <p class="lead"><%= t['content']%></p>
+  <h1 class="display-4"><%= ERB::Util.html_escape(t['title']) %></h1>
+  <p class="lead"><%= ERB::Util.html_escape(t['content'])%></p>
   <% if t['image_url'] != '' %>
   <img src="<%=t['image_url']%>">
   <%end%>
@@ -9,4 +10,3 @@
   <p class="lead"><%= t['created_at']%></p>
 </div>
 <%end%>
-<!-- t['user_id'] -->

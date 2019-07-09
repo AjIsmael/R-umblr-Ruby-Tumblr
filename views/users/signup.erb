@@ -3,6 +3,9 @@
 <div class="container">
 
 <form class="" action="/users/signup" method="post">
+  <% if @confirmationError %>
+  <small> You failed to enter the correct code in two trials. For security reasons we need you to restart the process.</small>
+  <% end %>
   <% if @missedInformation %>
   <small> you missed to input some information please refill all the fields and try again.</small>
   <% end %>

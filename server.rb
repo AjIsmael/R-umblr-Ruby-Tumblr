@@ -7,6 +7,7 @@ require 'bcrypt'
 
 $paramForSignup = {}
 $confirmationCode = ''
+$confirmationtrial = 0
 
 def signUpValidation
   isValid = true
@@ -106,6 +107,15 @@ post '/users/confirmSignUp' do
     p $confirmationCode
     p $paramForSignup
     erb :'users/thanks'
+  else
+    $confirmationtrial += 1
+    if $confirmationtrial == 2
+      @confirmationError = true
+      erb :'/users/signup'
+    else
+      @alert = true
+      erb :'/users/confirmSignUp'
+    end
   end
 end
 

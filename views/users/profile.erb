@@ -1,13 +1,28 @@
-<%= @user.first_name %><br>
+<% require "erb" %>
+<%= ERB::Util.html_escape(@user.first_name) %><br>
 <form action="/users/profile" method="post">
   <input type="text" name="first_name">
-  <input type="submit" value="Submit">
+  <input type="submit" value="Save">
 </form>
-<br><%= @user.last_name %><br>
+<br><%= ERB::Util.html_escape(@user.last_name) %><br>
 <form action="/users/profile" method="post">
   <input type="text" name="last_name">
-  <input type="submit" value="Submit">
+  <input type="submit" value="Save">
 </form>
-<br><%= @user.email %><br>
-<br><%= @user.birthday %><br>
+<br><%= ERB::Util.html_escape(@user.email) %><br>
+<br><%= ERB::Util.html_escape(@user.birthday) %><br>
 <br>
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Change Password</button>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form action="/users/profile" method="post">
+      <input type="password" name="currentPassword" placeholder="Please enter your current password">
+      <input type="password" name="newPassword" placeholder="Please enter the new password">
+      <input type="submit" value="Save">
+    </form>
+  </div>
+
+</div>

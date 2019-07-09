@@ -1,3 +1,6 @@
 <form action="/users/confirmSignUp" method="post">
  <input type="text" name="confirmationCode">
+<% if @alert %>
+<small> you entered the wrong code. You have one more chance to enter the correct answer so that you wont restart the process again!</small>
+<% end %>
 </form>

@@ -5,7 +5,7 @@
   <h1 class="display-4"><%= ERB::Util.html_escape(@posts[x]['title']) %></h1>
   <p class="lead"><%=ERB::Util.html_escape("#{@posts[x]['content']}")%></p>
   <% if @posts[x]['image_url'] != '' %>
-  <img src="<%=@posts[x]['image_url']%>">
+  <img src="<%="/Assets/img/#{session[:user_id]}/#{@posts[x]['image_url']}"%>">
   <%end%>
   <hr class="my-4">
   <p class="lead"><%= "#{@posts[x]['created_at']}"%></p>

@@ -205,7 +205,20 @@ get '/users/post' do
 end
 
 post '/users/post' do
+  if !Dir.exist?("./public/Assets/img/#{session[:user_id]}")
+    Dir.mkdir("./public/Assets/img/#{session[:user_id]}")
+  end
+  currentTime = Time.new
+  tempArray = currentTime.to_s
+  fileNameWithFormat = params[:image_url][:filename]
+  @filename = tempArray.split(' ').join.split('-').join.split(':').join
+  file = params[:image_url][:tempfile]
+  params[:image_url] = "#{@filename}#{fileNameWithFormat}"
+  File.open("./public/Assets/img/#{session[:user_id]}/#{@filename}#{fileNameWithFormat}", 'wb') do |f|
+    f.write(file.read)
+  end
   params.merge!(user_id: "#{session[:user_id]}")
+
   @post = Post.new(params)
   if @post.save
     p "#{@post.title} was saved to the database"

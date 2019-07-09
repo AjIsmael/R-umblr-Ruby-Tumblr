@@ -3,6 +3,7 @@ require "sinatra"
 require "httparty"
 require "action_mailer"
 require "./mailer.rb"
+require 'bcrypt'
 
 $paramForSignup = {}
 $confirmationCode = ''
@@ -85,6 +86,7 @@ post '/users/signup' do
     p 'user exists'
     erb :'users/signup'
   else
+    params[:password] = BCrypt::Password.create(params[:password])
     $confirmationCode = rand.to_s[2..10]
     $paramForSignup = params
     send_email(params[:email], $confirmationCode, params[:last_name])
@@ -123,7 +125,8 @@ post '/users/login' do
   given_password = params[:password]
   user = User.find_by(email:params[:email])
   if user
-    if user.password == given_password
+    userDecryptedPassword = BCrypt::Password.new(user.password)
+    if userDecryptedPassword == given_password
       p "user authenticated successfully"
       session[:user_id] = user.id
       redirect '/users/feeds'

@@ -1,7 +1,16 @@
 <form class="" action="/users/post" method="post" enctype="multipart/form-data" accept="image/jpeg">
   <input type="text" name="title" placeholder="Title">
+  <% if @alertTitle %>
+  <small> The title can not be empty.</small>
+  <% end %>
   <input type="text" name="content" placeholder="Content">
+  <% if @alertContent %>
+  <small> The content can not be empty</small>
+  <% end %>
   <input type="file" name="image_url" accept = "image/*" placeholder="image_url">
+  <% if @alertImage %>
+  <small> Invalid image. The image should be Jpg/png/jfif and the size must be less than 250KB</small>
+  <% end %>
   <input type="submit" value="submit">
 
 </form>

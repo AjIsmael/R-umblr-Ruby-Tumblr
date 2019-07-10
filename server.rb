@@ -34,6 +34,15 @@ def emailValidation(email)
   true if email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 end
 
+def image_type_check(image)
+  isValid = false
+  isValid = true if File.extname(image).downcase == '.jpg'
+  isValid = true if File.extname(image).downcase == '.jpeg'
+  isValid = true if File.extname(image).downcase == '.png'
+  isValid = true if File.extname(image).downcase == '.gif'
+  isValid = true if File.extname(image).downcase == '.jfif'
+  return isValid
+end
 
 def send_email(rec, confirmation_code,last_name)
   Newsletter.confirmation(rec,confirmation_code, last_name).deliver_now
@@ -205,26 +214,59 @@ get '/users/post' do
 end
 
 post '/users/post' do
-  if !Dir.exist?("./public/Assets/img/#{session[:user_id]}")
-    Dir.mkdir("./public/Assets/img/#{session[:user_id]}")
-  end
-  currentTime = Time.new
-  tempArray = currentTime.to_s
-  fileNameWithFormat = params[:image_url][:filename]
-  @filename = tempArray.split(' ').join.split('-').join.split(':').join
-  file = params[:image_url][:tempfile]
-  params[:image_url] = "#{@filename}#{fileNameWithFormat}"
-  File.open("./public/Assets/img/#{session[:user_id]}/#{@filename}#{fileNameWithFormat}", 'wb') do |f|
-    f.write(file.read)
-  end
-  params.merge!(user_id: "#{session[:user_id]}")
+  if session[:user_id]
+    if params[:title].strip == ''
+      @alertTitle = true
+      erb :'/users/post'
+    elsif params[:content].strip == ''
+      @alertContent = true
+      erb :'/users/post'
+    else
+      if params[:image_url] != nil
+        imageSize = File.size(params[:image_url][:tempfile])/1024
+        p imageSize
+        imageExtension = image_type_check(params[:image_url][:filename])
+        p imageExtension
+        if imageSize > 250 || imageExtension == false
+          @alertImage = true
+          erb :'/users/post'
+        else
+          if !Dir.exist?("./public/Assets/img/#{session[:user_id]}")
+            Dir.mkdir("./public/Assets/img/#{session[:user_id]}")
+          end
+          currentTime = Time.new
+          tempArray = currentTime.to_s
+          fileNameWithFormat = params[:image_url][:filename]
+          @filename = tempArray.split(' ').join.split('-').join.split(':').join
+          file = params[:image_url][:tempfile]
+          params[:image_url] = "#{@filename}#{fileNameWithFormat}"
+          File.open("./public/Assets/img/#{session[:user_id]}/#{@filename}#{fileNameWithFormat}", 'wb') do |f|
+            f.write(file.read)
+          end
+          params.merge!(user_id: "#{session[:user_id]}")
 
-  @post = Post.new(params)
-  if @post.save
-    p "#{@post.title} was saved to the database"
-    p params
+          @post = Post.new(params)
+          if @post.save
+            p "#{@post.title} was saved to the database"
+            p params
+          end
+          redirect '/'
+        end
+      else
+        params.merge!(user_id: "#{session[:user_id]}")
+        params[:image_url] = "none"
+        @post = Post.new(params)
+        if @post.save
+          p "#{@post.title} was saved to the database"
+          p params
+        end
+        redirect '/'
+      end
+    end
+  else
+    redirect '/'
   end
-  redirect '/'
+
 end
 
 # Delete request

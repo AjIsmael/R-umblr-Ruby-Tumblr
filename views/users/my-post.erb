@@ -3,10 +3,10 @@
 <div class="jumbotron">
   <h1 class="display-4"><%= ERB::Util.html_escape(t['title']) %></h1>
   <p class="lead"><%= ERB::Util.html_escape(t['content'])%></p>
-  <% if t['image_url'] != '' %>
-  <img src="<%=t['image_url']%>">
+  <% if t['image_url'] != 'none' %>
+  <img src="<%="/Assets/img/#{session[:user_id]}/#{t['image_url']}"%>">
   <%end%>
   <hr class="my-4">
-  <p class="lead"><%= t['created_at']%></p>
+  <p class="lead"><%=t['created_at'].to_date%></p>
 </div>
 <%end%>

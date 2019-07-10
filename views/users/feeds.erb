@@ -4,11 +4,11 @@
 <div class="jumbotron">
   <h1 class="display-4"><%= ERB::Util.html_escape(@posts[x]['title']) %></h1>
   <p class="lead"><%=ERB::Util.html_escape("#{@posts[x]['content']}")%></p>
-  <% if @posts[x]['image_url'] != '' %>
+  <% if @posts[x]['image_url'] != 'none' %>
   <img src="<%="/Assets/img/#{session[:user_id]}/#{@posts[x]['image_url']}"%>">
   <%end%>
   <hr class="my-4">
-  <p class="lead"><%= "#{@posts[x]['created_at']}"%></p>
+  <p class="lead"><%= "#{@posts[x]['created_at'].to_date}"%></p>
   <% if @comments[x].length > 0 %>
   <% @comments[x].each do |t| %>
     <p><%= t['comment_content']%></p>

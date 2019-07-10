@@ -6,6 +6,7 @@ gem 'httparty'
 gem "rest-client"
 gem 'actionmailer'
 gem "bcrypt"
+
 group :development do
   gem "sqlite3"
 end

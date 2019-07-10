@@ -48,8 +48,15 @@ def send_email(rec, confirmation_code,last_name)
   Newsletter.confirmation(rec,confirmation_code, last_name).deliver_now
 end
 
-ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database:"./database.sqlite3")
-set :database, {adapter: "sqlite3", database: "./database.sqlite3"}
+#DEVELOPMENT
+
+# ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database:"./database.sqlite3")
+# set :database, {adapter: "sqlite3", database: "./database.sqlite3"}
+
+#DEPLOYED
+require "active_record"
+ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"])
+
 enable :sessions
 
 class User < ActiveRecord::Base

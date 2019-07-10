@@ -11,8 +11,11 @@
       <label for="exampleInputPassword1">Password</label>
       <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
     </div>
-    <% if defined?(@alert)  %>
+    <% if defined?(@alert) && !defined?(@canceledAccountError) %>
     <small> Incorrect email or password </small>
+    <% end %>
+    <% if defined?(@canceledAccountError)  %>
+    <small> The Account you're trying to login is deactivated.</small>
     <% end %>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

@@ -143,6 +143,10 @@ end
 post '/users/login' do
   given_password = params[:password]
   user = User.find_by(email:params[:email])
+  if user.status == 'canceled'
+    @canceledAccountError = true
+    erb :'/users/login'
+  end
   if user
     userDecryptedPassword = BCrypt::Password.new(user.password)
     if userDecryptedPassword == given_password
@@ -192,6 +196,26 @@ post '/users/profile' do
   @user = User.find_by(id:session[:user_id])
   @user.update_attribute(:first_name, params[:first_name]) if params[:first_name]
   @user.update_attribute(:last_name, params[:last_name]) if params[:last_name]
+  userDecryptedPassword = BCrypt::Password.new(@user.password) if @user.password != nil
+  if params[:currentPassword] != nil && params[:newPassword] != nil
+    if params[:currentPassword].strip != '' && params[:newPassword].strip != ''
+      if userDecryptedPassword == params[:currentPassword]
+        params[:newPassword] = BCrypt::Password.create(params[:newPassword])
+        @user.update_attribute(:password,params[:newPassword])
+        @passwordChange = true
+      else
+        @passwordChangeError = true
+      end
+    end
+
+  end
+  if userDecryptedPassword == params[:PasswordForCanceling]
+    params[:currentpassword] = BCrypt::Password.create(params[:password])
+    @user.update_attribute(:status,"canceled")
+    session.clear
+    redirect '/'
+  end
+
   erb :'/users/profile'
 end
 

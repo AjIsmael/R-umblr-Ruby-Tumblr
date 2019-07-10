@@ -10,19 +10,25 @@
   <input type="submit" value="Save">
 </form>
 <br><%= ERB::Util.html_escape(@user.email) %><br>
-<br><%= ERB::Util.html_escape(@user.birthday) %><br>
+
+<br><%= ERB::Util.html_escape(@user.birthday.to_date) %><br>
 <br>
 <!-- Trigger/Open The Modal -->
-<button id="myBtn">Change Password</button>
+<button id="myBtn">Change Password</button><br>
+<br>
+<% if defined?(@passwordChangeError)  %>
+<small> The current password you entered is incorrect.</small>
+<% end %>
+<% if defined?(@passwordChange)  %>
+<small> Password successfully changed</small>
+<% end %>
+<form action="/users/profile" method="post">
+  <input type="password" name="currentPassword" placeholder="Please enter your current password">
+  <input type="password" name="newPassword" placeholder="Please enter the new password">
+  <input type="submit" value="ChangePassword">
+</form><br><br>
 
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <form action="/users/profile" method="post">
-      <input type="password" name="currentPassword" placeholder="Please enter your current password">
-      <input type="password" name="newPassword" placeholder="Please enter the new password">
-      <input type="submit" value="Save">
-    </form>
-  </div>
-
-</div>
+<form action="/users/profile" method="post">
+  <input type="password" name="PasswordForCanceling" placeholder="Please enter your current password">
+  <input type="submit" value="Cancel Account">
+</form>

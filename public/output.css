@@ -1,37 +1,74 @@
-.modal {
-  display: block;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
+body {
   top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: black;
-  background-color: rgba(0, 0, 0, 0.4);
 }
-
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
+body .nav-bg {
+  background-color: rgba(52, 58, 64, 0.91) !important;
+}
+body .small-grid {
+  display: grid;
+  grid-template-columns: 40% 40%;
+  grid-column-gap: 10%;
+}
+body .small-grid div {
+  display: inline;
+  margin-bottom: 2rem;
+}
+body .homepage {
+  margin-left: 10%;
   width: 80%;
+  margin-top: 5vh;
+  justify-content: center;
+  text-align: center;
 }
-
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+body .signup {
+  margin-top: 5vh;
+  padding: 2rem;
+  width: 60%;
+  margin-bottom: 2rem;
+  border-radius: 0.3rem;
+  background-color: rgba(108, 117, 125, 0.5) !important;
 }
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+body .signup h1 {
+  text-align: center;
+}
+body .title {
+  font-size: 2rem;
+  font-weight: 400;
+}
+body .content {
+  font-size: 1.3rem;
+}
+body .date {
+  font-size: 0.9rem;
+  opacity: 0.5;
+  margin-top: 0;
+  margin-bottom: 0.7rem;
+}
+body .posts {
+  padding-top: 1rem !important;
+  margin-bottom: 0.1rem !important;
+}
+body .post-image {
+  width: 100%;
+  height: 50vh;
+  border-radius: 0.3rem;
+}
+body .comment {
+  padding-left: 2%;
+  padding-bottom: 0.1rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+body .login {
+  margin-top: 5vh;
+  padding: 2rem;
+  width: 60%;
+  margin-bottom: 2rem;
+  border-radius: 0.3rem;
+  background-color: rgba(108, 117, 125, 0.5) !important;
+}
+body .login h1 {
+  text-align: center;
 }
 
 /*# sourceMappingURL=output.css.map */

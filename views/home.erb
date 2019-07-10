@@ -1,7 +1,10 @@
-<h1>Welcome to my website</h1>
 <% if session[:user_id] %>
   <% redirect 'users/feeds'%>
 <% else %>
-<a href="users/login">Login</a>
-<a href="users/signup">Sign up</a>
+<div class="homepage">
+  <h1 id="intro">Welcome to the Environmentalist Blog</h1>
+  <a href="users/login">Login</a>
+  <a href="users/signup">Sign up</a>
+
+</div>
 <% end %>

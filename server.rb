@@ -207,7 +207,8 @@ post '/users/profile' do
         @passwordChangeError = true
       end
     end
-
+  else
+    @invalidSubmittion = true
   end
   if userDecryptedPassword == params[:PasswordForCanceling]
     params[:currentpassword] = BCrypt::Password.create(params[:password])

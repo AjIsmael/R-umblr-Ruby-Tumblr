@@ -1,16 +1,29 @@
-<form class="" action="/users/post" method="post" enctype="multipart/form-data" accept="image/jpeg">
-  <input type="text" name="title" placeholder="Title">
-  <% if @alertTitle %>
-  <small> The title can not be empty.</small>
-  <% end %>
-  <input type="text" name="content" placeholder="Content">
-  <% if @alertContent %>
-  <small> The content can not be empty</small>
-  <% end %>
-  <input type="file" name="image_url" accept = "image/*" placeholder="image_url">
-  <% if @alertImage %>
-  <small> Invalid image. The image should be Jpg/png/jfif and the size must be less than 250KB</small>
-  <% end %>
-  <input type="submit" value="submit">
+<div class="container">
+  <form class="" action="/users/post" method="post" enctype="multipart/form-data" accept="image/jpeg">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" class="form-control" name="title" placeholder="Title">
+      <% if @alertTitle %>
+      <small> The title can not be empty.</small>
+      <% end %>
+    </div>
+    <div class="form-group">
+      <label>Content</label>
+      <textarea class="form-control" name="content" placeholder="Write your blog here" rows="8" cols="80"></textarea>
 
-</form>
+      <% if @alertContent %>
+      <small> The content can not be empty</small>
+      <% end %>
+    </div>
+    <div class="form-group">
+      <label>Image</label>
+      <input type="file" name="image_url" class="form-control" accept = "image/*" placeholder="image_url">
+      <% if @alertImage %>
+      <small> Invalid image. The image should be Jpg/png/jfif and the size must be less than 250KB</small>
+      <% end %>
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+
+  </form>
+
+</div>

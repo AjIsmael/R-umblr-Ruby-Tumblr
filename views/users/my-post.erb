@@ -1,12 +1,11 @@
 <% require 'erb' %>
 <% @posts.each do |t| %>
-<div class="jumbotron">
-  <h1 class="display-4"><%= ERB::Util.html_escape(t['title']) %></h1>
-  <p class="lead"><%= ERB::Util.html_escape(t['content'])%></p>
+<div class="jumbotron posts">
+  <h1 class="display-4 title"><%= ERB::Util.html_escape(t['title'].upcase) %></h1>
+  <p class="lead date"><%=t['created_at'].to_date%></p>
   <% if t['image_url'] != 'none' %>
-  <img src="<%="/Assets/img/#{session[:user_id]}/#{t['image_url']}"%>">
+  <img class= "post-image" src="<%="/Assets/img/#{session[:user_id]}/#{t['image_url']}"%>">
   <%end%>
-  <hr class="my-4">
-  <p class="lead"><%=t['created_at'].to_date%></p>
+  <p class="lead content"><%= ERB::Util.html_escape(t['content'])%></p>
 </div>
 <%end%>

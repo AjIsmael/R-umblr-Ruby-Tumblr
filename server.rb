@@ -263,16 +263,13 @@ post '/users/post' do
           @alertImage = true
           erb :'/users/post'
         else
-          if !Dir.exist?("./public/Assets/img/#{session[:user_id]}")
-            Dir.mkdir("./public/Assets/img/#{session[:user_id]}")
-          end
           currentTime = Time.new
           tempArray = currentTime.to_s
           fileNameWithFormat = params[:image_url][:filename]
           @filename = tempArray.split(' ').join.split('-').join.split(':').join
           file = params[:image_url][:tempfile]
           params[:image_url] = "#{@filename}#{fileNameWithFormat}"
-          File.open("./public/Assets/img/#{session[:user_id]}/#{@filename}#{fileNameWithFormat}", 'wb') do |f|
+          File.open("./#{@filename}#{fileNameWithFormat}", 'wb') do |f|
             f.write(file.read)
           end
           params.merge!(user_id: "#{session[:user_id]}")

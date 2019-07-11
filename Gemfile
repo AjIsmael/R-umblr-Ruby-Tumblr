@@ -5,6 +5,7 @@ gem 'httparty'
 gem "rest-client"
 gem 'actionmailer'
 gem "bcrypt"
+gem 'mimemagic'
 
 group :development do
   gem "sqlite3"

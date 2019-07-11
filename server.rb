@@ -265,6 +265,9 @@ post '/users/post' do
           @alertImage = true
           erb :'/users/post'
         else
+          if !Dir.exist?("./public/Assets/img/#{session[:user_id]}")
+            Dir.mkdir("./public/Assets/img/#{session[:user_id]}")
+          end
           currentTime = Time.new
           tempArray = currentTime.to_s
           fileNameWithFormat = params[:image_url][:filename]

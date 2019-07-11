@@ -1,8 +1,14 @@
 body {
   top: 0;
+  background-image: url("http://www.hd-freeimages.com/uploads/large/world-environment-day/glass-world-environment-day.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+body #logo {
+  width: 13rem;
 }
 body .nav-bg {
-  background-color: rgba(52, 58, 64, 0.91) !important;
+  background-color: #f2f2f2 !important;
 }
 body .small-grid {
   display: grid;
@@ -14,22 +20,38 @@ body .small-grid div {
   margin-bottom: 2rem;
 }
 body .homepage {
-  margin-left: 10%;
-  width: 80%;
-  margin-top: 5vh;
+  margin-left: 25%;
+  width: 50%;
+  margin-top: 15vh;
   justify-content: center;
   text-align: center;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: rgba(233, 236, 239, 0.6);
+  border-radius: 0.3rem;
 }
 body .signup {
   margin-top: 5vh;
-  padding: 2rem;
-  width: 60%;
+  padding: 1rem;
+  width: 40%;
   margin-bottom: 2rem;
   border-radius: 0.3rem;
   background-color: rgba(108, 117, 125, 0.5) !important;
+  font-size: 1rem;
 }
 body .signup h1 {
   text-align: center;
+}
+body .signup input {
+  height: 2rem;
+}
+body .signup .form-group {
+  margin-bottom: 0.2rem;
+}
+body .signup button {
+  height: 2rem;
+  margin-top: 0.2rem;
+  font-size: 1rem;
 }
 body .title {
   font-size: 2rem;
@@ -60,15 +82,43 @@ body .comment {
   opacity: 0.8;
 }
 body .login {
-  margin-top: 5vh;
+  margin-top: 10vh;
   padding: 2rem;
-  width: 60%;
+  width: 40%;
   margin-bottom: 2rem;
   border-radius: 0.3rem;
   background-color: rgba(108, 117, 125, 0.5) !important;
 }
 body .login h1 {
   text-align: center;
+}
+body .feeds {
+  width: 70%;
+  margin-top: 5vh;
+  margin-left: 15%;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
+}
+body .feeds .jumbotron-looking {
+  padding: 2rem 1rem;
+}
+body .post {
+  width: 70%;
+  margin-top: 5vh;
+  padding: 2rem;
+  background-color: rgba(108, 117, 125, 0.5) !important;
+  border-radius: 0.3rem;
+}
+body .post input {
+  height: 2.5rem;
+}
+body .post .form-group {
+  margin-bottom: 0.2rem;
+}
+body .post button {
+  height: 2rem;
+  margin-top: 0.2rem;
+  font-size: 1rem;
 }
 
 /*# sourceMappingURL=output.css.map */

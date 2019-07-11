@@ -1,7 +1,13 @@
 body {
   top: 0;
+  background-image: url("http://www.hd-freeimages.com/uploads/large/world-environment-day/glass-world-environment-day.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  #logo {
+    width: 13rem;
+  }
   .nav-bg{
-    background-color: rgba(52, 58, 64, 0.91)!important;
+    background-color: rgba(242, 242, 242,1)!important;
   }
   .small-grid {
     display: grid;
@@ -13,21 +19,37 @@ body {
     }
   }
  .homepage {
-   margin-left: 10%;
-   width:80%;
-   margin-top: 5vh;
+   margin-left: 25%;
+   width:50%;
+   margin-top: 15vh;
    justify-content: center;
    text-align: center;
+   padding:2rem 1rem;
+   margin-bottom:2rem;
+   background-color:rgba(233, 236, 239, .6);
+   border-radius:.3rem;
  }
  .signup{
    margin-top: 5vh;
-   padding: 2rem;
-   width: 60%;
+   padding: 1rem;
+   width: 40%;
    margin-bottom:2rem;
    border-radius:.3rem;
    background-color:rgba(108, 117, 125, 0.5)!important;
    h1{
      text-align: center;
+   }
+   font-size: 1rem;
+   input{
+     height: 2rem;
+   }
+   .form-group{
+     margin-bottom: .2rem;
+   }
+   button{
+     height: 2rem;
+     margin-top: .2rem;
+     font-size: 1rem;
    }
  }
  .title {
@@ -59,14 +81,42 @@ body {
    opacity: .8;
  }
  .login {
-   margin-top: 5vh;
+   margin-top: 10vh;
    padding: 2rem;
-   width: 60%;
+   width: 40%;
    margin-bottom:2rem;
    border-radius:.3rem;
    background-color:rgba(108, 117, 125, 0.5)!important;
    h1{
         text-align: center;
       }
+ }
+ .feeds{
+   width:70%;
+   margin-top: 5vh;
+   margin-left: 15%;
+   background-color: rgba(233, 236, 239, 1);
+   .jumbotron-looking{
+     padding:2rem 1rem;
+   }
+   border-radius:.3rem
+ }
+ .post {
+   width:70%;
+   margin-top: 5vh;
+   padding: 2rem;
+   background-color:rgba(108, 117, 125, 0.5)!important;
+   border-radius:.3rem;
+   input{
+     height: 2.5rem;
+   }
+   .form-group{
+     margin-bottom: .2rem;
+   }
+   button{
+     height: 2rem;
+     margin-top: .2rem;
+     font-size: 1rem;
+   }
  }
 }

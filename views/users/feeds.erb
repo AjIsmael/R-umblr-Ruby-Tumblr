@@ -1,25 +1,28 @@
 <% require "erb" %>
 <% count = @posts.length - 1 %>
-<% for x in 0..(@posts.length - 1) do %>
-<div class="jumbotron posts">
+<div class="feeds">
+  <% for x in 0..(@posts.length - 1) do %>
+  <div class="jumbotron-looking posts">
 
-  <h1 class="display-4 title"><%= ERB::Util.html_escape(@posts[x]['title'].upcase) %></h1>
-  <p class="lead date"><%= "#{@posts[x]['created_at'].to_date}"%></p>
-  <% if @posts[x]['image_url'] != 'none' %>
-  <img class= "post-image" src="<%="/Assets/img/#{@posts[x]['user_id']}/#{@posts[x]['image_url']}"%>">
-  <%end%>
-  <p class="lead content"><%=ERB::Util.html_escape("#{@posts[x]['content']}")%></p>
-  <hr class="my-4">
-  <% if @comments[x].length > 0 %>
-  <% @comments[x].each do |t| %>
+    <h1 class="display-4 title"><%= ERB::Util.html_escape(@posts[x]['title'].upcase) %></h1>
+    <p class="lead date"><%= "#{@posts[x]['created_at'].to_date}"%></p>
+    <% if @posts[x]['image_url'] != 'none' %>
+    <img class= "post-image" src="<%="/Assets/img/#{@posts[x]['user_id']}/#{@posts[x]['image_url']}"%>">
+    <%end%>
+    <p class="lead content"><%=ERB::Util.html_escape("#{@posts[x]['content']}")%></p>
+    <hr class="my-4">
+    <% if @comments[x].length > 0 %>
+    <% @comments[x].each do |t| %>
     <p class="comment"><%= t['comment_content']%></p>
-  <% end %>
-  <% end %>
-  <form action="/users/feeds" method="post" class="px-4 py-3">
-    <div class="form-group">
-      <input type="hidden" name="post_id" value="<%= @posts[x]['id'] %>">
-      <input type="text" name="comment_content" class="form-control" placeholder="your comment">
-    </div>
-  </form>
+    <% end %>
+    <% end %>
+    <form action="/users/feeds" method="post" class="px-4 py-3">
+      <div class="form-group">
+        <input type="hidden" name="post_id" value="<%= @posts[x]['id'] %>">
+        <input type="text" name="comment_content" class="form-control" placeholder="your comment">
+      </div>
+    </form>
+  </div>
+  <%end%>
+
 </div>
-<%end%>

@@ -50,12 +50,12 @@ end
 
 #DEVELOPMENT
 
-# ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database:"./database.sqlite3")
-# set :database, {adapter: "sqlite3", database: "./database.sqlite3"}
+ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database:"./database.sqlite3")
+set :database, {adapter: "sqlite3", database: "./database.sqlite3"}
 
 # DEPLOYED
-require "active_record"
-ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"])
+# require "active_record"
+# ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"])
 
 enable :sessions
 
@@ -150,11 +150,11 @@ end
 post '/users/login' do
   given_password = params[:password]
   user = User.find_by(email:params[:email])
-  if user.status == 'canceled'
-    @canceledAccountError = true
-    erb :'/users/login'
-  end
   if user
+    if user.status == 'canceled'
+      @canceledAccountError = true
+      erb :'/users/login'
+    end
     userDecryptedPassword = BCrypt::Password.new(user.password)
     if userDecryptedPassword == given_password
       p "user authenticated successfully"
@@ -164,6 +164,9 @@ post '/users/login' do
       @alert = true
       erb :'/users/login'
     end
+  else
+    @alert = true
+    erb :'/users/login'
   end
 end
 

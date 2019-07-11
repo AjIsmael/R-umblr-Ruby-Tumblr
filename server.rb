@@ -4,6 +4,7 @@ require "httparty"
 require "action_mailer"
 require "./mailer.rb"
 require 'bcrypt'
+require 'mimemagic'
 
 $paramForSignup = {}
 $confirmationCode = ''
@@ -36,13 +37,12 @@ end
 
 def image_type_check(image)
   isValid = false
-  isValid = true if File.extname(image).downcase == '.jpg'
-  isValid = true if File.extname(image).downcase == '.jpeg'
-  isValid = true if File.extname(image).downcase == '.png'
-  isValid = true if File.extname(image).downcase == '.gif'
-  isValid = true if File.extname(image).downcase == '.jfif'
+  if MimeMagic.by_magic(File.open(image)) != nil
+    isValid = true if MimeMagic.by_magic(File.open(image)).mediatype == "image"
+  end
   return isValid
 end
+
 
 def send_email(rec, confirmation_code,last_name)
   Newsletter.confirmation(rec,confirmation_code, last_name).deliver_now
@@ -53,7 +53,7 @@ end
 # ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database:"./database.sqlite3")
 # set :database, {adapter: "sqlite3", database: "./database.sqlite3"}
 
-#DEPLOYED
+# DEPLOYED
 require "active_record"
 ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"])
 
@@ -257,7 +257,9 @@ post '/users/post' do
       if params[:image_url] != nil
         imageSize = File.size(params[:image_url][:tempfile])/1024
         p imageSize
-        imageExtension = image_type_check(params[:image_url][:filename])
+        imageExtension = image_type_check(params[:image_url][:tempfile])
+        randomNumber = rand.to_s[2..10]
+
         p imageExtension
         if imageSize > 250 || imageExtension == false
           @alertImage = true
@@ -268,8 +270,8 @@ post '/users/post' do
           fileNameWithFormat = params[:image_url][:filename]
           @filename = tempArray.split(' ').join.split('-').join.split(':').join
           file = params[:image_url][:tempfile]
-          params[:image_url] = "#{@filename}#{fileNameWithFormat}"
-          File.open("./#{@filename}#{fileNameWithFormat}", 'wb') do |f|
+          params[:image_url] = "#{@filename}#{randomNumber}#{fileNameWithFormat}"
+          File.open("./public/Assets/img/#{session[:user_id]}/#{@filename}#{randomNumber}#{fileNameWithFormat}", 'wb') do |f|
             f.write(file.read)
           end
           params.merge!(user_id: "#{session[:user_id]}")

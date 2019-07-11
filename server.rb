@@ -50,12 +50,12 @@ end
 
 #DEVELOPMENT
 
-ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database:"./database.sqlite3")
-set :database, {adapter: "sqlite3", database: "./database.sqlite3"}
+# ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database:"./database.sqlite3")
+# set :database, {adapter: "sqlite3", database: "./database.sqlite3"}
 
 # DEPLOYED
-# require "active_record"
-# ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"])
+require "active_record"
+ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"])
 
 enable :sessions
 

@@ -8,7 +8,7 @@
         <%= ERB::Util.html_escape(@user.first_name.capitalize) %><br>
         <form action="/users/profile" method="post">
           <div class="form-group">
-            <input type="text" class="form-control" name="first_name">
+            <input type="text" class="form-control" name="first_name" required>
             <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </form>
@@ -19,7 +19,7 @@
         <%= ERB::Util.html_escape(@user.last_name.capitalize) %><br>
         <form action="/users/profile" method="post">
           <div class="form-group">
-            <input type="text" class="form-control" name="last_name">
+            <input type="text" class="form-control" name="last_name" required>
             <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </form>
@@ -49,10 +49,10 @@
     <% end %>
     <form action="/users/profile" method="post">
       <div class="form-group">
-        <input type="password"  class="form-control" name="currentPassword" placeholder="Please enter your current password">
+        <input type="password"  class="form-control" name="currentPassword" placeholder="Please enter your current password" required>
       </div>
       <div class="form-group">
-        <input type="password" class="form-control"  name="newPassword" placeholder="Please enter the new password">
+        <input type="password" class="form-control"  name="newPassword" placeholder="Please enter the new password" required>
       </div>
       <button type="submit" class="btn btn-warning">Change Password</button>
     </form>
@@ -62,7 +62,7 @@
     <h4>Cancel Account</h4>
     <form action="/users/profile" method="post">
       <div class="form-group">
-        <input type="password" class="form-control" name="PasswordForCanceling" placeholder="Please enter your current password">
+        <input type="password" class="form-control" name="PasswordForCanceling" placeholder="Please enter your current password" required>
       </div>
       <button type="submit" class="btn btn-danger">Cancel Account</button>
     </form>

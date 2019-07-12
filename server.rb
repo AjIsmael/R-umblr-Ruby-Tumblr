@@ -48,14 +48,21 @@ def send_email(rec, confirmation_code,last_name)
   Newsletter.confirmation(rec,confirmation_code, last_name).deliver_now
 end
 
-#DEVELOPMENT
-
+# #DEVELOPMENT
+#
 # ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database:"./database.sqlite3")
 # set :database, {adapter: "sqlite3", database: "./database.sqlite3"}
+#
+# # DEPLOYED
+# ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"])
+if ENV['RACK_ENV']
+  require "active_record"
+  ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
+else
+  set :database, {adapter: "sqlite3", database: "database.sqlite3"}
+end
 
-# DEPLOYED
-require "active_record"
-ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"])
+
 
 enable :sessions
 

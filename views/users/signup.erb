@@ -11,15 +11,15 @@
   <% end %>
   <div class="form-group">
     <label>First Name</label>
-    <input type="text" name="first_name"  class="form-control" placeholder="First Name">
+    <input type="text" name="first_name"  class="form-control" placeholder="First Name" required>
   </div>
   <div class="form-group">
     <label>Last Name</label>
-    <input type="text" name="last_name"  class="form-control" placeholder="Last Name">
+    <input type="text" name="last_name"  class="form-control" placeholder="Last Name" required>
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
   </div>
   <% if @alert %>
   <small> The email address you used exists in our database.</small>
@@ -29,14 +29,14 @@
   <% end %>
   <div class="form-group">
     <label>Birthday</label>
-    <input type="date" name="birthday" class="form-control"  placeholder="Birthday">
+    <input type="date" name="birthday" class="form-control"  placeholder="Birthday" required>
   </div>
   <% if @ageLimitalert %>
   <small> You must be between the age of 18 and 85 to signup to this website.</small>
   <% end %>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>

@@ -39,6 +39,47 @@ body .homepage {
 body .homepage a {
   color: white;
 }
+body .confirmation {
+  margin-left: 25%;
+  width: 50%;
+  margin-top: 15vh;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: rgba(233, 236, 239, 0.6);
+  border-radius: 0.3rem;
+}
+body .confirmation a {
+  color: white;
+}
+body .confirmation input {
+  height: 2rem;
+}
+body .confirmation button {
+  height: 2.5rem;
+  margin-top: 0.2rem;
+  font-size: 1rem;
+}
+body .thanks {
+  margin-left: 25%;
+  width: 50%;
+  margin-top: 15vh;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: rgba(233, 236, 239, 0.6);
+  border-radius: 0.3rem;
+}
+body .thanks button {
+  height: 2.5rem;
+  margin-top: 0.2rem;
+  font-size: 1rem;
+}
+body .thanks button a {
+  color: white;
+}
 body .signup {
   margin-top: 5vh;
   padding: 1rem;

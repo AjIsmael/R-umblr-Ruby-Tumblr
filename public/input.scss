@@ -39,6 +39,47 @@ body {
      color: white;
    }
  }
+ .confirmation{
+   margin-left: 25%;
+   width:50%;
+   margin-top: 15vh;
+   justify-content: center;
+   text-align: center;
+   padding:2rem 1rem;
+   margin-bottom:2rem;
+   background-color:rgba(233, 236, 239, .6);
+   border-radius:.3rem;
+   a{
+     color: white;
+   }
+   input{
+     height: 2rem;
+   }
+   button{
+     height: 2.5rem;
+     margin-top: .2rem;
+     font-size: 1rem;
+   }
+ }
+ .thanks{
+   margin-left: 25%;
+   width:50%;
+   margin-top: 15vh;
+   justify-content: center;
+   text-align: center;
+   padding:2rem 1rem;
+   margin-bottom:2rem;
+   background-color:rgba(233, 236, 239, .6);
+   border-radius:.3rem;
+   button{
+     height: 2.5rem;
+     margin-top: .2rem;
+     font-size: 1rem;
+     a{
+       color: white;
+     }
+   }
+ }
  .signup{
    margin-top: 5vh;
    padding: 1rem;

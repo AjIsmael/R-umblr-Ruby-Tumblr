@@ -1,6 +1,10 @@
-<form action="/users/confirmSignUp" method="post">
- <input type="text" name="confirmationCode">
-<% if @alert %>
-<small> you entered the wrong code. You have one more chance to enter the correct answer so that you wont restart the process again!</small>
-<% end %>
-</form>
+<div class="confirmation">
+  <h3>Please enter the code you recieved at <%= @email %></h3>
+  <form action="/users/confirmSignUp" method="post">
+    <input type="text" name="confirmationCode">
+    <button type="submit" class="btn btn-primary"Confirm</button>
+    <% if @alert %>
+    <small> you entered the wrong code. You have one more chance to enter the correct answer so that you wont restart the process again!</small>
+    <% end %>
+  </form>
+</div>

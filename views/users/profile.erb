@@ -1,69 +1,72 @@
 <% require "erb" %>
-<div class="jumbotron">
-  <h4>General Information</h4>
-  <div class="small-grid">
-    <div>
-      <label>First Name: </label>
-      <%= ERB::Util.html_escape(@user.first_name.capitalize) %><br>
-      <form action="/users/profile" method="post">
-        <div class="form-group">
-          <input type="text" class="form-control" name="first_name">
-          <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-      </form>
+<div class="profile">
+  <div class="jumbotron">
+    <h4>General Information</h4>
+    <div class="small-grid">
+      <div>
+        <label>First Name: </label>
+        <%= ERB::Util.html_escape(@user.first_name.capitalize) %><br>
+        <form action="/users/profile" method="post">
+          <div class="form-group">
+            <input type="text" class="form-control" name="first_name">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
 
+      </div>
+      <div>
+        <label>Last Name: </label>
+        <%= ERB::Util.html_escape(@user.last_name.capitalize) %><br>
+        <form action="/users/profile" method="post">
+          <div class="form-group">
+            <input type="text" class="form-control" name="last_name">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div>
-      <label>Last Name: </label>
-      <%= ERB::Util.html_escape(@user.last_name.capitalize) %><br>
-      <form action="/users/profile" method="post">
-        <div class="form-group">
-          <input type="text" class="form-control" name="last_name">
-          <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-      </form>
+    <div class="small-grid">
+      <div>
+        <label>Email: </label>
+        <%= ERB::Util.html_escape(@user.email) %>
+      </div>
+      <div>
+        <label>Date of birth: </label>
+        <%= ERB::Util.html_escape(@user.birthday.to_date) %>
+      </div>
     </div>
   </div>
-  <div class="small-grid">
-    <div>
-      <label>Email: </label>
-      <%= ERB::Util.html_escape(@user.email) %>
-    </div>
-    <div>
-      <label>Date of birth: </label>
-      <%= ERB::Util.html_escape(@user.birthday.to_date) %>
-    </div>
-  </div>
-</div>
-<div class="jumbotron">
-  <h4>Change Password</h4>
-  <% if defined?(@passwordChangeError)  %>
-  <small> The current password you entered is incorrect.</small>
-  <% end %>
-  <% if defined?(@passwordChange)  %>
-  <small> Password successfully changed</small>
-  <% end %>
-  <% if defined?(@invalidSubmittion)  %>
-  <small> Invalid trial. plaese make sure you filled the inputs.</small>
-  <% end %>
-  <form action="/users/profile" method="post">
-    <div class="form-group">
-      <input type="password"  class="form-control" name="currentPassword" placeholder="Please enter your current password">
-    </div>
-    <div class="form-group">
-      <input type="password" class="form-control"  name="newPassword" placeholder="Please enter the new password">
-    </div>
-    <button type="submit" class="btn btn-primary">Change Password</button>
-  </form>
+  <div class="jumbotron">
+    <h4>Change Password</h4>
+    <% if defined?(@passwordChangeError)  %>
+    <small> The current password you entered is incorrect.</small>
+    <% end %>
+    <% if defined?(@passwordChange)  %>
+    <small> Password successfully changed</small>
+    <% end %>
+    <% if defined?(@invalidSubmittion)  %>
+    <small> Invalid trial. plaese make sure you filled the inputs.</small>
+    <% end %>
+    <form action="/users/profile" method="post">
+      <div class="form-group">
+        <input type="password"  class="form-control" name="currentPassword" placeholder="Please enter your current password">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control"  name="newPassword" placeholder="Please enter the new password">
+      </div>
+      <button type="submit" class="btn btn-warning">Change Password</button>
+    </form>
 
-</div>
-<div class="jumbotron">
-  <h4>Cancel Account</h4>
-  <form action="/users/profile" method="post">
-    <div class="form-group">
-      <input type="password" class="form-control" name="PasswordForCanceling" placeholder="Please enter your current password">
-    </div>
-    <button type="submit" class="btn btn-primary">Cancel Account</button>
-  </form>
+  </div>
+  <div class="jumbotron">
+    <h4>Cancel Account</h4>
+    <form action="/users/profile" method="post">
+      <div class="form-group">
+        <input type="password" class="form-control" name="PasswordForCanceling" placeholder="Please enter your current password">
+      </div>
+      <button type="submit" class="btn btn-danger">Cancel Account</button>
+    </form>
+
+  </div>
 
 </div>

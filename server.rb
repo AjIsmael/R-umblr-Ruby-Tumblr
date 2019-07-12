@@ -107,6 +107,7 @@ post '/users/signup' do
     $confirmationCode = rand.to_s[2..10]
     $paramForSignup = params
     send_email(params[:email], $confirmationCode, params[:last_name])
+    @email = params[:email]
     erb :'users/confirmSignUp'
   end
 end
@@ -184,6 +185,9 @@ get '/users/feeds' do
 end
 
 post '/users/feeds' do
+  user = User.find_by(id:session[:user_id])
+  name = "#{user.first_name} #{user.last_name}"
+  params.merge!(name: name)
   params.merge!(commenter_id: "#{session[:user_id]}")
   @comment = Comment.new(params)
   if @comment.save
@@ -264,7 +268,7 @@ post '/users/post' do
         randomNumber = rand.to_s[2..10]
 
         p imageExtension
-        if imageSize > 250 || imageExtension == false
+        if imageSize > 500 || imageExtension == false
           @alertImage = true
           erb :'/users/post'
         else
@@ -280,8 +284,10 @@ post '/users/post' do
           File.open("./public/Assets/img/#{session[:user_id]}/#{@filename}#{randomNumber}#{fileNameWithFormat}", 'wb') do |f|
             f.write(file.read)
           end
+          user = User.find_by(id:session[:user_id])
+          name = "#{user.first_name} #{user.last_name}"
           params.merge!(user_id: "#{session[:user_id]}")
-
+          params.merge!(name: name)
           @post = Post.new(params)
           if @post.save
             p "#{@post.title} was saved to the database"
@@ -291,6 +297,9 @@ post '/users/post' do
         end
       else
         params.merge!(user_id: "#{session[:user_id]}")
+        user = User.find_by(id:session[:user_id])
+        name = "#{user.first_name} #{user.last_name}"
+        params.merge!(name: name)
         params[:image_url] = "none"
         @post = Post.new(params)
         if @post.save

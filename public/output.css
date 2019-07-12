@@ -1,14 +1,20 @@
+@import "https://fonts.googleapis.com/css?family=Roboto&display=swap";
 body {
+  font-family: "Roboto", sans-serif;
   top: 0;
   background-image: url("http://www.hd-freeimages.com/uploads/large/world-environment-day/glass-world-environment-day.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 body #logo {
   width: 13rem;
 }
 body .nav-bg {
   background-color: #f2f2f2 !important;
+}
+body .nav-bar {
+  right: 0 !important;
 }
 body .small-grid {
   display: grid;
@@ -29,6 +35,9 @@ body .homepage {
   margin-bottom: 2rem;
   background-color: rgba(233, 236, 239, 0.6);
   border-radius: 0.3rem;
+}
+body .homepage a {
+  color: white;
 }
 body .signup {
   margin-top: 5vh;
@@ -101,6 +110,32 @@ body .feeds {
 }
 body .feeds .jumbotron-looking {
   padding: 2rem 1rem;
+}
+body .profile {
+  width: 50%;
+  margin-top: 5vh;
+  margin-left: 25%;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
+}
+body .profile .jumbotron {
+  padding: 1rem 1rem;
+  margin-bottom: 0;
+}
+body .profile input {
+  height: 2rem;
+  width: 60%;
+}
+body .profile .form-group {
+  margin-bottom: 0.2rem;
+}
+body .profile button {
+  height: 2rem;
+  margin-top: 0.2rem;
+  font-size: 1rem;
+}
+body .profile h4 {
+  padding-left: 1rem;
 }
 body .post {
   width: 70%;

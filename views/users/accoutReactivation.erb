@@ -1,0 +1,15 @@
+<div class="login container">
+  <form action="/users/accountReactivation" method="post">
+    <% if defined?(@missedInformation)  %>
+    <small> Check if you have filled all required information. You have missed some.</small>
+    <% end %>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+    </div>
+    <% if defined?(@noaccount)  %>
+    <small> There is no account in theis email please enter a correct email or signup with this email.</small>
+    <% end %>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

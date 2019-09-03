@@ -7,8 +7,13 @@ require 'bcrypt'
 require 'mimemagic'
 
 $paramForSignup = {}
+$accountToBeReset = {}
 $confirmationCode = ''
 $confirmationtrial = 0
+$passwordResettrial = 0
+$reactivateTrial = 0
+$passwordChangeCode = ''
+$reactivationCode = ''
 
 def signUpValidation
   isValid = true
@@ -48,6 +53,13 @@ def send_email(rec, confirmation_code,last_name)
   Newsletter.confirmation(rec,confirmation_code, last_name).deliver_now
 end
 
+def send_password_reset_email(rec, confirmation_code,last_name)
+  Newsletter.passwordChange(rec,confirmation_code, last_name).deliver_now
+end
+
+def send_reactivation_email(rec, confirmation_code,last_name)
+  Newsletter.reactivate(rec,confirmation_code, last_name).deliver_now
+end
 # #DEVELOPMENT
 #
 # ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database:"./database.sqlite3")
@@ -139,6 +151,48 @@ post '/users/confirmSignUp' do
     else
       @alert = true
       erb :'/users/confirmSignUp'
+    end
+  end
+end
+
+get '/users/resetPassword' do
+  if session[:user_id]
+     redirect '/users/feeds'
+  else
+    @user = User.new
+    erb :'users/signup'
+  end
+end
+
+post '/users/resetPassword' do
+  user = User.find_by(email:params[:email])
+  if user
+    $passwordChangeCode = rand.to_s[2..10]
+    send_password_reset_email(params[:email], $passwordChangeCode, user.last_name)
+    $accountToBeReset = user
+    erb :'users/confirmationPasswordReset'
+  else
+    @PasswordResetResponse = true
+  end
+end
+
+post '/users/confirmationPasswordReset' do
+  if params[:confirmationPasswordReset] == $passwordChangeCode
+    if params[:newPassword] != nil && params[:newPassword].strip != ''
+          params[:newPassword] = BCrypt::Password.create(params[:newPassword])
+          $accountToBeReset.update_attribute(:password,params[:newPassword])
+    else
+      @invalidSubmittion = true
+    end
+    erb :'users/login'
+  else
+    $passwordResettrial += 1
+    if $passwordResettrial == 2
+      @passwordResetConfirmationError = true
+      erb :'/users/resetPassword'
+    else
+      @passwordResetalert = true
+      erb :'/users/confirmationPasswordReset'
     end
   end
 end
